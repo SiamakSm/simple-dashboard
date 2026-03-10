@@ -1,17 +1,11 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import PatientInfo from "./components/PatientInfo"
 
 function App() {
   return (
     <div>
       <h1>Patient Dashboard</h1>
-
-      <p>Patient ID: 1024</p>
-      <p>Age: 57</p>
-      <p>Usage: 6.2h</p>
-
+      <PatientInfo id={1024} age={57} usage={6.2} />
     </div>
   )
 }
