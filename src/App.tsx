@@ -1,10 +1,23 @@
 import './App.css'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import PatientInfo from "./components/PatientInfo"
 
 function App() {
 
-  const [usage, setUsage] = useState(6.2)
+  const [usage, setUsage] = useState(0)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+
+    setTimeout(() => {
+      setUsage(6)
+      setLoading(false)
+    }, 1000);
+
+  }, [])
+
+  if (loading)
+    return <p>Loading patient data ....</p>
 
   return (
     <div>
@@ -15,7 +28,6 @@ function App() {
       <button onClick={() => setUsage(usage + 0.5)}>
         Increase
       </button>
-
       <button onClick={() => setUsage(usage - 0.5)}>
         Decrease
       </button>
