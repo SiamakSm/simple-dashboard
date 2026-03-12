@@ -1,12 +1,6 @@
+
 export const patients = [
-    {
-        id: 2024,
-        age: 257,
-        usage: 26.2
-    },
-    {
-        id: 3024,
-        age: 357,
-        usage: 36.2
-    }
+    { id: 1024, age: 57, usage: 6.2 },
+    { id: 2048, age: 63, usage: 5.8 },
+    { id: 3091, age: 49, usage: 7.1 }
 ]

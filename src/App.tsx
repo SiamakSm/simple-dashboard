@@ -2,6 +2,7 @@ import './App.css'
 import { useState, useEffect } from "react"
 import PatientInfo from "./components/PatientInfo"
 import { patients } from "./data/patient"
+import PatientList from "./components/PatientList"
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
   useEffect(() => {
 
     setTimeout(() => {
-      setData(patients[0])
+      setData(patients[x])
       setLoading(false)
     }, 1000)
 
@@ -23,17 +24,12 @@ function App() {
   return (
     <div>
       <h1>Patient Dashboard</h1>
+      <PatientList
+        patients={patients}
+        onSelect={(patient) => setData(patient)}>
+      </PatientList>
 
       <PatientInfo id={data.id} age={data.age} usage={data.usage} />
-
-      <button onClick={() => setData(patients[1])}>
-        Patient 2
-      </button>
-
-      <button onClick={() => setData(patients[0])}>
-        Patient 1
-      </button>
-
     </div>
   )
 }
