@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
 
     setTimeout(() => {
-      setData(patients[x])
+      setData(patients[0])
       setLoading(false)
     }, 1000)
 
