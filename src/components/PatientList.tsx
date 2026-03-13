@@ -18,13 +18,12 @@ function PatientList({ patients, onSelect }: PatientListProps) {
       {patients.map((patient) => (
         <div key={patient.id}>
           <button onClick={() => onSelect(patient)}>
-            Patient {patient.id}
+            Patient {patient.id} (Age {patient.age})
           </button>
         </div>
       ))}
-      
     </div>
-  )
+  );
 }
 
 export default PatientList
