@@ -22,7 +22,7 @@ function PatientList({ patients, onSelect }: PatientListProps) {
           </button>
         </div>
       ))}
-
+      
     </div>
   )
 }
