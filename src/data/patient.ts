@@ -1,3 +1,5 @@
+// data/patient.ts
+
 export const patients = [
   {
     id: 1024,

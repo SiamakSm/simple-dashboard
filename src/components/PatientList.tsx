@@ -1,8 +1,4 @@
-type Patient = {
-  id: number
-  age: number
-  usage: number
-}
+import type { Patient } from "../types/patient";
 
 type PatientListProps = {
   patients: Patient[]

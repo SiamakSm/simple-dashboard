@@ -1,8 +1,9 @@
 // patientApi.ts
 
 import { patients } from "../data/patient";
+import type { Patient } from "../types/patient";
 
-export function getPatientById(id : number){
+export function getPatientById(id : number): Promise<Patient>{
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const patient = patients.find((p) => p.id === id)

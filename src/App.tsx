@@ -10,12 +10,14 @@ import UsageChart from "./components/UsageChart";
 import { usePatient } from './hook/usePatient'
 import RiskScore from './components/RiskScore'
 
+
 function App() {
   const [selectedId, setSelectedId] = useState<number>(patients[0].id)
   const { data, loading, error } = usePatient(selectedId)
 
   if (loading) return <p> Loading patient data...</p>
   if (error) return <p>{error}</p>
+  if (!data) return <p>No patient data</p>
 
   return (
     <div className="dashboard">
@@ -34,12 +36,12 @@ function App() {
         <PatientInfo id={data.id} age={data.age} usage={data.usage} />
 
         {data.usageHistory ? (
-          <UsageChart data={data.usageHistory || []} />
+          <UsageChart data={data.usageHistory} />
         ) : (
           <p>No usage data available</p>
         )}
 
-        <RiskScore risk={data.risk} />
+        <RiskScore risk={data.risk ?? 0} />
       </div>
     </div>
   )

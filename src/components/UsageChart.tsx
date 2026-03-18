@@ -1,7 +1,8 @@
 import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts'
+import type { UsagePoint } from '../types/patient'
 
 type UsageChartProps = {
-  data: { day: string; usage: number }[]
+  data: UsagePoint[]
 }
 
 function UsageChart({ data }: UsageChartProps) {
