@@ -6,17 +6,20 @@ import PatientInfo from "./components/PatientInfo";
 import { patients } from "./data/patient";
 import PatientList from "./components/PatientList";
 import UsageChart from "./components/UsageChart";
+import { getPatientById } from './api/patientApi'
 
 function App() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      setData(patients[0]);
-      setLoading(false);
-    }, 1000);
-  }, []);
+    async function fetchData() {
+      const patient = await getPatientById(3091)
+      setData(patient)
+      setLoading(false)
+    }
+    fetchData()
+  }, [])
 
   if (loading) return <p>Loading patient data...</p>;
 
@@ -25,7 +28,12 @@ function App() {
       <div className="sidebar">
         <PatientList
           patients={patients}
-          onSelect={(patient) => setData(patient)}
+          onSelect={async (patient) => {
+            setLoading(true)
+            const p = await getPatientById(patient.id)
+            setData(p)
+            setLoading(false)
+          }}
         />
       </div>
 

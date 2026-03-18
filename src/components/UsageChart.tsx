@@ -1,4 +1,3 @@
-//UsageChart.tsx
 import { LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts'
 
 type UsageChartProps = {
@@ -6,18 +5,27 @@ type UsageChartProps = {
 }
 
 function UsageChart({ data }: UsageChartProps) {
+  // 🔴 détecter si une valeur est invalide
+  const hasInvalidData = data.some((d) => typeof d.usage !== 'number')
+
+  // 🟢 nettoyer les données
   const safeData = data.map((d) => ({
     day: d.day,
     usage: typeof d.usage === 'number' ? d.usage : 0,
   }))
 
   return (
-    <LineChart width={400} height={200} data={safeData}>
-      <XAxis dataKey="day" />
-      <YAxis />
-      <Tooltip />
-      <Line type="natural" dataKey="usage" stroke="yellow" />
-    </LineChart>
+    <div>
+      {/* message si données invalides */}
+      {hasInvalidData && <p>Invalid data detected</p>}
+
+      <LineChart width={400} height={200} data={safeData}>
+        <XAxis dataKey="day" />
+        <YAxis />
+        <Tooltip />
+        <Line type="monotone" dataKey="usage" stroke="#8884d8" />
+      </LineChart>
+    </div>
   )
 }
 
