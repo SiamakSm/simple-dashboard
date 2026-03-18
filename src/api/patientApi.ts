@@ -1,12 +1,12 @@
 // patientApi.ts
 
 import { patients } from "../data/patient";
-    
+
 export function getPatientById(id : number){
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const patient = patients.find((p) => p.id === id)
-        
+
         if (!patient) {
           reject('Patient not found')
         } else {
@@ -15,3 +15,5 @@ export function getPatientById(id : number){
       }, 1000)
     })
 }
+
+

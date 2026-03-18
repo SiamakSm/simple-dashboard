@@ -1,31 +1,17 @@
 // app.tsx
 //
+
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from 'react'
 import PatientInfo from "./components/PatientInfo";
 import { patients } from "./data/patient";
 import PatientList from "./components/PatientList";
 import UsageChart from "./components/UsageChart";
-import { getPatientById } from './api/patientApi'
+import { usePatient } from './hook/usePatient'
 
 function App() {
-  const [data, setData] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const patient = await getPatientById(3091)
-        setData(patient)
-      } catch (e) {
-        setError('Failed to load patient')
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchData()
-  }, [])
+  const [selectedId, setSelectedId] = useState<number>(patients[0].id)
+  const { data, loading, error } = usePatient(selectedId)
 
   if (loading) return <p> Loading patient data...</p>
   if (error) return <p>{error}</p>
@@ -35,11 +21,8 @@ function App() {
       <div className="sidebar">
         <PatientList
           patients={patients}
-          onSelect={async (patient) => {
-            setLoading(true)
-            const p = await getPatientById(patient.id)
-            setData(p)
-            setLoading(false)
+          onSelect={(patient) => {
+            setSelectedId(patient.id)
           }}
         />
       </div>
