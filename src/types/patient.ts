@@ -1,9 +1,5 @@
 // types/patient.ts
 
-export type UsagePoint = {
-    day :string,
-    usage : number
-}
 
 export type Patient = {
   id: number
@@ -12,4 +8,9 @@ export type Patient = {
 
   risk?: number
   usageHistory?: UsagePoint[]
+}
+
+export type UsagePoint = {
+  day: string
+  usage: number
 }
