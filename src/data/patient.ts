@@ -1,6 +1,27 @@
-
 export const patients = [
-    { id: 1024, age: 57, usage: 6.2 },
-    { id: 2048, age: 63, usage: 5.8 },
-    { id: 3091, age: 49, usage: 7.1 }
+  {
+    id: 1024,
+    age: 57,
+    usage: 6.2,
+    usageHistory: [
+      { day: 'Mon', usage: 5 },
+      { day: 'Tue', usage: 6 },
+      { day: 'Wed', usage: 4 },
+    ],
+  },
+  {
+    id: 2048,
+    age: 63,
+    usage: 5.8,
+  },
+  {
+    id: 3091,
+    age: 49,
+    usage: 7.1,
+    usageHistory: [
+      { day: 'Mon', usage: 2 },
+      { day: 'Tue', usage: 6 },
+      { day: 'Wed', usage: 8 },
+    ],
+  },
 ]

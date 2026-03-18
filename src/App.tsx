@@ -34,10 +34,14 @@ function App() {
 
         <PatientInfo id={data.id} age={data.age} usage={data.usage} />
 
-        <UsageChart />
+        {data.usageHistory ? (
+          <UsageChart data={data.usageHistory || []} />
+        ) : (
+          <p>No usage data available</p>
+        )}
       </div>
     </div>
-  );
+  )
 }
 
 export default App;
