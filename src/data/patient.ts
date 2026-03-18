@@ -8,11 +8,13 @@ export const patients = [
       { day: 'Tue', usage: 6 },
       { day: 'Wed', usage: 4 },
     ],
+    risk: 0.7,
   },
   {
     id: 2048,
     age: 63,
     usage: 5.8,
+    risk: 1.5,
   },
   {
     id: 3091,

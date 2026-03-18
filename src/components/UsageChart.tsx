@@ -5,10 +5,8 @@ type UsageChartProps = {
 }
 
 function UsageChart({ data }: UsageChartProps) {
-  // 🔴 détecter si une valeur est invalide
   const hasInvalidData = data.some((d) => typeof d.usage !== 'number')
 
-  // 🟢 nettoyer les données
   const safeData = data.map((d) => ({
     day: d.day,
     usage: typeof d.usage === 'number' ? d.usage : 0,
@@ -16,7 +14,6 @@ function UsageChart({ data }: UsageChartProps) {
 
   return (
     <div>
-      {/* message si données invalides */}
       {hasInvalidData && <p>Invalid data detected</p>}
 
       <LineChart width={400} height={200} data={safeData}>

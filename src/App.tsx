@@ -8,6 +8,7 @@ import { patients } from "./data/patient";
 import PatientList from "./components/PatientList";
 import UsageChart from "./components/UsageChart";
 import { usePatient } from './hook/usePatient'
+import RiskScore from './components/RiskScore'
 
 function App() {
   const [selectedId, setSelectedId] = useState<number>(patients[0].id)
@@ -37,6 +38,8 @@ function App() {
         ) : (
           <p>No usage data available</p>
         )}
+
+        <RiskScore risk={data.risk} />
       </div>
     </div>
   )
