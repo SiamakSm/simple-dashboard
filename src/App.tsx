@@ -21,7 +21,7 @@ function App() {
     fetchData()
   }, [])
 
-  if (loading) return <p>Loading patient data...</p>;
+  if (loading) return <p> Loading patient data...</p>;
 
   return (
     <div className="dashboard">
