@@ -9,19 +9,26 @@ import UsageChart from "./components/UsageChart";
 import { getPatientById } from './api/patientApi'
 
 function App() {
-  const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     async function fetchData() {
-      const patient = await getPatientById(3091)
-      setData(patient)
-      setLoading(false)
+      try {
+        const patient = await getPatientById(3091)
+        setData(patient)
+      } catch (e) {
+        setError('Failed to load patient')
+      } finally {
+        setLoading(false)
+      }
     }
     fetchData()
   }, [])
 
-  if (loading) return <p> Loading patient data...</p>;
+  if (loading) return <p> Loading patient data...</p>
+  if (error) return <p>{error}</p>
 
   return (
     <div className="dashboard">
