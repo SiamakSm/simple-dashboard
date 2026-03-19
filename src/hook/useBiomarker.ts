@@ -1,12 +1,10 @@
-// hook/usePatient.ts
-// 
+// hook/useBiomarker.ts
 
 import { useState, useEffect } from "react"
-import { getPatientById } from "../api/patientApi"
-import type { Patient } from '../types/patient'
+import { getBiomarkerById } from "../api/biomarkerApi"
 
-export function usePatient(id: number) {
-  const [data, setData] = useState<Patient | null>(null)
+export function useBiomarker(id: number) {
+  const [data, setData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -15,12 +13,12 @@ export function usePatient(id: number) {
       try {
     
         setLoading(true)
-        const patient = await getPatientById(id)
-        setData(patient)
+        const result = await getBiomarkerById(id)
+        setData(result)
         setError(null)
       
     } catch (e) {
-        setError("Failed to load patient")
+        setError("Failed to load biomarker")
     } finally {
         setLoading(false)
     }

@@ -16,6 +16,7 @@ function UsageChart({ data }: UsageChartProps) {
   return (
     <div>
       {hasInvalidData && <p>Invalid data detected</p>}
+      <h2>Patient Usage Chart</h2>
 
       <LineChart width={400} height={200} data={safeData}>
         <XAxis dataKey="day" />

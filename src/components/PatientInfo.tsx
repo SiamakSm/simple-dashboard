@@ -1,3 +1,5 @@
+// components/PatientInfo.tsx
+//
 type PatientInfoProps = {
   id: number
   age: number
@@ -13,7 +15,7 @@ function PatientInfo({ id, age, usage }: PatientInfoProps) {
       <p>Age: {age}</p>
       <p>Usage: {usage} hours</p>
     </div>
-  );
+  )
 }
 
 export default PatientInfo
