@@ -6,17 +6,15 @@ import { useState } from 'react'
 import PatientInfo from "./components/PatientInfo";
 import { patients } from "./data/patient";
 import PatientList from "./components/PatientList";
-import UsageChart from "./components/UsageChart";
-import { usePatient } from './hook/usePatient'
+import UsageChart from './components/UsageChart'
 import RiskScore from './components/RiskScore'
-import { useBiomarker } from './hook/useBiomarker'
 import Biomarker from './components/Biomarker'
+import { useDashboardData } from './hook/useDashboardData'
 
 
 function App() {
   const [selectedId, setSelectedId] = useState<number>(patients[0].id)
-  const { data, loading, error } = usePatient(selectedId)
-  const { data: bio } = useBiomarker(selectedId)
+  const { patient, biomarker, loading, error } = useDashboardData(selectedId)
 
 
   return (
@@ -36,19 +34,31 @@ function App() {
         {loading && <p>Loading patient data ...</p>}
         {error && <p>{error}</p>}
 
-        {!loading && !error && data && (
+        {!loading && !error && patient && (
           <>
-            <PatientInfo id={data.id} age={data.age} usage={data.usage} />
+            <PatientInfo
+              id={patient.id}
+              age={patient.age}
+              usage={patient.usage}
+            />
 
-            {data.usageHistory ? (
-              <UsageChart data={data.usageHistory} />
+            {patient.usageHistory ? (
+              <UsageChart data={patient.usageHistory} />
             ) : (
               <p>No usage data available</p>
             )}
 
-            <RiskScore risk={data.risk ?? 0} />
+            {patient.risk !== undefined ? (
+              <RiskScore risk={patient.risk} />
+            ) : (
+              <p>No risk data</p>
+            )}
 
-            {bio && <Biomarker heartRate={bio.heartRate} />}
+            {biomarker ? (
+              <Biomarker heartRate={biomarker.heartRate} />
+            ) : (
+              <p>No biomarker data</p>
+            )}
           </>
         )}
       </div>
