@@ -10,6 +10,7 @@ import UsageChart from "./components/UsageChart";
 import { usePatient } from './hook/usePatient'
 import RiskScore from './components/RiskScore'
 import { useBiomarker } from './hook/useBiomarker'
+import Biomarker from './components/Biomarker'
 
 
 function App() {
@@ -47,7 +48,7 @@ function App() {
 
             <RiskScore risk={data.risk ?? 0} />
 
-            {bio && <p>Heart rate: {bio.heartRate}</p>}
+            {bio && <Biomarker heartRate={bio.heartRate} />}
           </>
         )}
       </div>

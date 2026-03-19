@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react"
 import { getBiomarkerById } from "../api/biomarkerApi"
+import type { Biomarker } from "../types/biomarker"
 
 export function useBiomarker(id: number) {
-  const [data, setData] = useState<any>(null)
+  const [data, setData] = useState<Biomarker | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 

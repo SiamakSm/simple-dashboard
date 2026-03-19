@@ -1,8 +1,6 @@
 // data/biomarker.ts
 
-type Biomarker = {
-  heartRate : number
-}
+import type { Biomarker } from "../types/biomarker";
 
 export const biomarkers : Record <number, Biomarker> = {
   1024: { heartRate: 72 },

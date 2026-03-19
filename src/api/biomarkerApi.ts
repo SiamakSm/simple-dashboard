@@ -12,7 +12,6 @@ export function getBiomarkerById(id : number):Promise<{heartRate :number}>{
         } else {
           resolve({
             heartRate : data.heartRate ?? 0
-        
         })
         }
       }, 1000)

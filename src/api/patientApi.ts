@@ -1,4 +1,4 @@
-// patientApi.ts
+// api/patientApi.ts
 
 import { patients } from "../data/patient";
 import type { Patient } from "../types/patient";
