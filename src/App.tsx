@@ -1,63 +1,52 @@
 // app.tsx
 //
-
-import "./App.css";
-import { useState } from 'react'
-import PatientInfo from "./components/PatientInfo";
-import { patients } from "./data/patient";
-import PatientList from "./components/PatientList";
-import UsageChart from './components/UsageChart'
-import RiskScore from './components/RiskScore'
-import Biomarker from './components/Biomarker'
-import { useDashboardData } from './hook/useDashboardData'
-
+import "./App.css"
+import { useState } from "react"
+import { patients } from "./data/patient"
+import PatientList from "./components/PatientList"
+import PatientInfo from "./components/PatientInfo"
+import UsageChart from "./components/UsageChart"
+import RiskScore from "./components/RiskScore"
+import Biomarker from "./components/Biomarker"
+import { useDashboardData } from "./hook/useDashboardData"
 
 function App() {
   const [selectedId, setSelectedId] = useState<number>(patients[0].id)
-  const { patient, biomarker, loading, error } = useDashboardData(selectedId)
-
+  const { data, loading, error } = useDashboardData(selectedId)
 
   return (
     <div className="dashboard">
       <div className="sidebar">
         <PatientList
           patients={patients}
-          onSelect={(patient) => {
-            setSelectedId(patient.id)
-          }}
+          onSelect={(patient) => setSelectedId(patient.id)}
         />
       </div>
 
       <div className="main">
         <h1>Patient Dashboard</h1>
 
-        {loading && <p>Loading patient data ...</p>}
+        {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
 
-        {!loading && !error && patient && (
+        {!loading && !error && data && (
           <>
-            <PatientInfo
-              id={patient.id}
-              age={patient.age}
-              usage={patient.usage}
-            />
+            <PatientInfo id={data.id} age={data.age} usage={data.usage} />
 
-            {patient.usageHistory ? (
-              <UsageChart data={patient.usageHistory} />
+            <p>Status: {data.status}</p>
+
+            {data.usageHistory.length > 0 ? (
+              <UsageChart data={data.usageHistory} />
             ) : (
-              <p>No usage data available</p>
+              <p>No usage data</p>
             )}
 
-            {patient.risk !== undefined ? (
-              <RiskScore risk={patient.risk} />
-            ) : (
-              <p>No risk data</p>
+            {data.risk !== null && (
+              <RiskScore risk={data.risk} />
             )}
 
-            {biomarker ? (
-              <Biomarker heartRate={biomarker.heartRate} />
-            ) : (
-              <p>No biomarker data</p>
+            {data.heartRate !== null && (
+              <Biomarker heartRate={data.heartRate} />
             )}
           </>
         )}
@@ -66,4 +55,4 @@ function App() {
   )
 }
 
-export default App;
+export default App
