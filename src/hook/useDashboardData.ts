@@ -1,7 +1,5 @@
 // hook/useDashboardData.ts
 import { useState, useEffect } from 'react'
-import { getPatientById } from '../api/patientApi'
-import { getBiomarkerById } from '../api/biomarkerApi'
 import { mapDashboardData, type DashboardData } from '../utils/mapDashboardData'
 
 export function useDashboardData(id: number) {
@@ -14,20 +12,17 @@ export function useDashboardData(id: number) {
       try {
         setLoading(true)
 
-        const patient = await getPatientById(id)
+        const resPatient = await fetch(`http://localhost:8000/patient/${id}`)
+        const patient = await resPatient.json()
 
-        let biomarker = null
-        try {
-          biomarker = await getBiomarkerById(id)
-        } catch {
-          biomarker = null
-        }
+        const resBio = await fetch(`http://localhost:8000/biomarker/${id}`)
+        const biomarker = await resBio.json()
 
         const mapped = mapDashboardData(patient, biomarker)
 
         setData(mapped)
         setError(null)
-      } catch {
+      } catch (e) {
         setError('Failed to load dashboard data')
       } finally {
         setLoading(false)
