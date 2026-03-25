@@ -2,7 +2,6 @@
 //
 import "./App.css"
 import { useState } from "react"
-import { patients } from "./data/patient"
 import PatientList from "./components/PatientList"
 import PatientInfo from "./components/PatientInfo"
 import UsageChart from "./components/UsageChart"
@@ -11,7 +10,7 @@ import Biomarker from "./components/Biomarker"
 import { useDashboardData } from "./hook/useDashboardData"
 
 function App() {
-  const [selectedId, setSelectedId] = useState<number>(patients[0].id)
+  const [selectedId, setSelectedId] = useState<number>(111)
   const { data, loading, error } = useDashboardData(selectedId)
 
   return (
@@ -35,7 +34,7 @@ function App() {
 
             <p>Status: {data.status}</p>
 
-            {data.usageHistory.length > 0 ? (
+            {data.usageHistory && data.usageHistory.length > 0 ? (
               <UsageChart data={data.usageHistory} />
             ) : (
               <p>No usage data</p>

@@ -1,9 +1,9 @@
 // hook/useDashboardData.ts
 import { useState, useEffect } from 'react'
-import { mapDashboardData, type DashboardData } from '../utils/mapDashboardData'
+import { mapDashboardData } from '../utils/mapDashboardData'
 
 export function useDashboardData(id: number) {
-  const [data, setData] = useState<DashboardData | null>(null)
+  const [data, setData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -12,12 +12,28 @@ export function useDashboardData(id: number) {
       try {
         setLoading(true)
 
-        const resPatient = await fetch(`http://localhost:8000/patient/${id}`)
-        const patient = await resPatient.json()
+        const results = await Promise.allSettled([
+          fetch(`http://localhost:8000/patient/${id}`),
+          fetch(`http://localhost:8000/biomarker/${id}`),
+        ])
 
-        const resBio = await fetch(`http://localhost:8000/biomarker/${id}`)
-        const biomarker = await resBio.json()
+        const patientRes = results[0]
+        const biomarkerRes = results[1]
 
+        let patient = null
+        let biomarker = null
+
+        if (patientRes.status === 'fulfilled') {
+          patient = await patientRes.value.json()
+        }
+        if (biomarkerRes.status === 'fulfilled') {
+          biomarker = await biomarkerRes.value.json()
+        }
+        
+        if (!patient) {
+          throw new Error('No patient data')
+        }
+        
         const mapped = mapDashboardData(patient, biomarker)
 
         setData(mapped)

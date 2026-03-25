@@ -1,31 +1,33 @@
 // data/patient.ts
+// doesnt need any more(we use the data from our api in backend)
 
-export const patients = [
-  {
-    id: 111,
-    age: 57,
-    usage: 6.2,
-    usageHistory: [
-      { day: 'Mon', usage: 5 },
-      { day: 'Tue', usage: 6 },
-      { day: 'Wed', usage: 4 },
-    ],
-    risk: 0.7,
-  },
-  {
-    id: 222,
-    age: 63,
-    usage: 5.8,
-    risk: 1.5,
-  },
-  {
-    id: 333,
-    age: 49,
-    usage: 7.1,
-    usageHistory: [
-      { day: 'Mon', usage: 2 },
-      { day: 'Tue', usage: 6 },
-      { day: 'Wed', usage: 8 },
-    ],
-  },
-]
+//export const patients = [
+//  {
+//    id: 111,
+//    age: 57,
+//    usage: 6.2,
+//    usageHistory: [
+//      { day: 'Mon', usage: 5 },
+//      { day: 'Tue', usage: 6 },
+//      { day: 'Wed', usage: 4 },
+//    ],
+//    risk: 0.7,
+//  },
+//  {
+//    id: 222,
+//    age: 63,
+//    usage: 5.8,
+//    risk: 1.5,
+//  },
+//  {
+//    id: 333,
+//    age: 49,
+//    usage: 7.1,
+//    usageHistory: [
+//      { day: 'Mon', usage: 2 },
+//      { day: 'Tue', usage: 6 },
+//      { day: 'Wed', usage: 8 },
+//    ],
+//  },
+//]
+//
