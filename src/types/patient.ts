@@ -6,8 +6,8 @@ export type Patient = {
   age: number
   usage: number
 
-  risk?: number
-  usageHistory?: UsagePoint[]
+  risk?: number | null
+  usageHistory?: UsagePoint[] | null
 }
 
 export type UsagePoint = {

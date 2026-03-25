@@ -8,27 +8,34 @@ import UsageChart from "./components/UsageChart"
 import RiskScore from "./components/RiskScore"
 import Biomarker from "./components/Biomarker"
 import { useDashboardData } from "./hook/useDashboardData"
+import { usePatients } from './hook/usePatients'
 
 function App() {
-  const [selectedId, setSelectedId] = useState<number>(111)
-  const { data, loading, error } = useDashboardData(selectedId)
+  const [selectedId, setSelectedId] = useState<number | null>(null)
+  const { patients, loading: loadingPatients } = usePatients()
+  const { data, loading, error } = useDashboardData(selectedId ?? 0)
 
   return (
     <div className="dashboard">
       <div className="sidebar">
-        <PatientList
-          patients={patients}
-          onSelect={(patient) => setSelectedId(patient.id)}
-        />
+        {loadingPatients ? (
+          <p>Loading patients...</p>
+        ) : (
+          <PatientList
+            patients={patients}
+            onSelect={(patient) => setSelectedId(patient.id)}
+          />
+        )}
       </div>
 
       <div className="main">
         <h1>Patient Dashboard</h1>
+        {!selectedId && <p>Select a patient</p>}
 
-        {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
+        {!selectedId && loading && <p>Loading...</p>}
+        {!selectedId && error && <p>{error}</p>}
 
-        {!loading && !error && data && (
+        {!selectedId && !loading && !error && data && (
           <>
             <PatientInfo id={data.id} age={data.age} usage={data.usage} />
 
@@ -40,9 +47,7 @@ function App() {
               <p>No usage data</p>
             )}
 
-            {data.risk !== null && (
-              <RiskScore risk={data.risk} />
-            )}
+            {data.risk !== null && <RiskScore risk={data.risk} />}
 
             {data.heartRate !== null && (
               <Biomarker heartRate={data.heartRate} />

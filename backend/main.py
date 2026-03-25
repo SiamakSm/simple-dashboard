@@ -1,6 +1,7 @@
 #  backend/main.py
 
 from fastapi import FastAPI
+from fastapi import HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from data.patient import patients
 from data.biomarker import biomarkers
@@ -15,24 +16,40 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# root
 @app.get("/")
 def root():
     return {"message": "API is running"}
 
 
-# get patient
+# get patients
+@app.get("/patients")
+def get_patients():
+    return patients
+
+
+# get patient by id
 @app.get("/patient/{id}")
 def get_patient(id: int):
     for p in patients:
         if p["id"] == id:
             return p
-    return {"error": "Patient not found"}
+    raise HTTPException(status_code=404, detail="Patient not found")
 
 
-# get biomarker
+# get biomarkers
+@app.get("/biomarkers")
+def get_biomarkers():
+    return biomarkers
+
+
+# get biomarker by id
 @app.get("/biomarker/{id}")
 def get_biomarker(id: int):
-    return biomarkers.get(id, {})
+    biomarker = biomarkers.get(id)
+    if not biomarker:
+        raise HTTPException(status_code=404, detail="Biomarker not found")
+    return biomarker
 
 
 # get risk (simulation IA)
@@ -50,4 +67,4 @@ def get_risk(id: int):
             else:
                 return {"risk": "low"}
 
-    return {"error": "Patient not found"}
+    raise HTTPException(status_code=404, detail="Patient not found")
