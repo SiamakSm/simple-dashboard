@@ -32,10 +32,10 @@ function App() {
         <h1>Patient Dashboard</h1>
         {!selectedId && <p>Select a patient</p>}
 
-        {!selectedId && loading && <p>Loading...</p>}
-        {!selectedId && error && <p>{error}</p>}
+        {selectedId && loading && <p>Loading...</p>}
+        {selectedId && error && <p>{error}</p>}
 
-        {!selectedId && !loading && !error && data && (
+        {selectedId && !loading && !error && data && (
           <>
             <PatientInfo id={data.id} age={data.age} usage={data.usage} />
 

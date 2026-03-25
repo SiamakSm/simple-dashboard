@@ -4,6 +4,6 @@
 //import type { Biomarker } from "../types/biomarker";
 //
 //export const biomarkers: Record<number, Biomarker> = {
-//  111: { heartRate: 72 },
-//  333: { heartRate: 65 },
+//  1: { heartRate: 72 },
+//  3: { heartRate: 65 },
 //}

@@ -3,7 +3,7 @@
 
 //export const patients = [
 //  {
-//    id: 111,
+//    id: 1,
 //    age: 57,
 //    usage: 6.2,
 //    usageHistory: [
@@ -14,13 +14,13 @@
 //    risk: 0.7,
 //  },
 //  {
-//    id: 222,
+//    id: 2,
 //    age: 63,
 //    usage: 5.8,
 //    risk: 1.5,
 //  },
 //  {
-//    id: 333,
+//    id: 3,
 //    age: 49,
 //    usage: 7.1,
 //    usageHistory: [

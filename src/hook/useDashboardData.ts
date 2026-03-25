@@ -2,12 +2,14 @@
 import { useState, useEffect } from 'react'
 import { mapDashboardData } from '../utils/mapDashboardData'
 
-export function useDashboardData(id: number) {
+export function useDashboardData(id: number | null) {
   const [data, setData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    if (!id) return
+
     async function fetchData() {
       try {
         setLoading(true)
@@ -26,14 +28,14 @@ export function useDashboardData(id: number) {
         if (patientRes.status === 'fulfilled') {
           patient = await patientRes.value.json()
         }
-        if (biomarkerRes.status === 'fulfilled') {
+        if (biomarkerRes.status === 'fulfilled' && biomarkerRes.value.ok) {
           biomarker = await biomarkerRes.value.json()
         }
-        
+
         if (!patient) {
           throw new Error('No patient data')
         }
-        
+
         const mapped = mapDashboardData(patient, biomarker)
 
         setData(mapped)
@@ -44,7 +46,6 @@ export function useDashboardData(id: number) {
         setLoading(false)
       }
     }
-
     fetchData()
   }, [id])
 
