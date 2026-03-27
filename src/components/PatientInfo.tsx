@@ -6,7 +6,8 @@ type PatientInfoProps = {
   usage: number
 }
 
-function PatientInfo({ id, age, usage }: PatientInfoProps) {
+function PatientInfo({ id, age, usage }: 
+  PatientInfoProps) {
   return (
     <div>
       <h2>Patient Information</h2>

@@ -4,7 +4,8 @@ type BiomarkerProps = {
     heartRate : number
 }
 
-function Biomarker({heartRate} : BiomarkerProps) {
+function Biomarker({heartRate} : 
+    BiomarkerProps) {
     return (
         <div>
             <h2>Patient Biomarker</h2>

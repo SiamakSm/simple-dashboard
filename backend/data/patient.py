@@ -4,6 +4,7 @@ patients = [
     {
         "id": 1,
         "age": 57,
+        "status": "adherent",
         "usage": 6.2,
         "usageHistory": [
             {"day": "Mon", "usage": 5},
@@ -16,11 +17,13 @@ patients = [
         "id": 2,
         "age": 63,
         "usage": 5.8,
+        "status": "non-adherent",
         "risk": 1.5,
     },
     {
         "id": 3,
         "age": 49,
+        "status": "adherent",
         "usage": 7.1,
         "usageHistory": [
             {"day": "Mon", "usage": 2},

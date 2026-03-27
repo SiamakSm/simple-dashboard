@@ -5,7 +5,8 @@ type PatientListProps = {
   onSelect: (patient: Patient) => void
 }
 
-function PatientList({ patients, onSelect }: PatientListProps) {
+function PatientList({ patients, onSelect }: 
+  PatientListProps) {
 
   return (
     <div>

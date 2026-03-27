@@ -5,6 +5,7 @@ from fastapi import HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from data.patient import patients
 from data.biomarker import biomarkers
+from services.risk_service import compute_risk
 
 app = FastAPI()
 
@@ -58,13 +59,6 @@ def get_risk(id: int):
     for p in patients:
         if p["id"] == id:
             usage = p.get("usage", 0)
-
-            # logique simple (mock AI)
-            if usage < 4:
-                return {"risk": "high"}
-            elif usage < 6:
-                return {"risk": "medium"}
-            else:
-                return {"risk": "low"}
-
+            risk = compute_risk(usage)
+            return {"risk" : risk}
     raise HTTPException(status_code=404, detail="Patient not found")

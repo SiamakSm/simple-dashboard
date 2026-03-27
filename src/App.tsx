@@ -13,7 +13,7 @@ import { usePatients } from './hook/usePatients'
 function App() {
   const [selectedId, setSelectedId] = useState<number | null>(null)
   const { patients, loading: loadingPatients } = usePatients()
-  const { data, loading, error } = useDashboardData(selectedId ?? 0)
+  const { data, loading, error } = useDashboardData(selectedId)
 
   return (
     <div className="dashboard">
