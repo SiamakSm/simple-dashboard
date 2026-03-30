@@ -8,7 +8,32 @@ from services.risk_service import compute_risk
 
 router = APIRouter()
 
+# get dashboard/id
+@router.get("/dashboard/{id}")
+def get_dashboard(id: int):
+    patient = next((p for p in patients if p["id"] == id), None)
 
+    if not patient:
+        raise HTTPException(status_code=404, detail="Patient not found")
+
+    biomarker = biomarkers.get(id)
+
+    heart_rate = biomarker["heartRate"] if biomarker else None
+    usage = patient.get("usage", 0)
+
+    risk = compute_risk(usage, heart_rate)
+
+    return {
+        "id": patient["id"],
+        "age": patient["age"],
+        "usage": patient.get("usage"),
+        "status": patient.get("status"),
+        "usageHistory": patient.get("usageHistory"),
+        "heartRate": heart_rate,
+        "risk": risk,
+    }
+    
+    
 # get patients
 @router.get("/patients")
 def get_patients():
