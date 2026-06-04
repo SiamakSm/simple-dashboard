@@ -1,13 +1,14 @@
 // types/patient.ts
 
-
 export type Patient = {
   id: number
   age: number
   usage: number
+  status?: string
 
-  risk?: number | null
+  risk?: number | string | null
   usageHistory?: UsagePoint[] | null
+  heartRate?: number | null
 }
 
 export type UsagePoint = {

@@ -12,7 +12,7 @@ export function useDashboardData(id: number | null) {
       try {
         setLoading(true)
 
-        const results = await fetch(`http://localhost:8000/dashboard/${id}`)
+        const results = await fetch(`http://127.0.0.1:8000/dashboard/${id}`)
         const data = await results.json()
 
         setData(data)

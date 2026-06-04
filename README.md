@@ -1,54 +1,47 @@
-# React + TypeScript + Vite
+# Patient Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, clean, and interactive patient dashboard built with React. This application provides a medical interface to view patient information, status, usage history, biomarker data, and risk scores.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Sidebar Navigation:** Quickly browse and select patients from the master list.
+- **Dynamic Risk Score:** Visually see the patient's risk level with color-coded badges and risk bar gauges.
+- **Usage History Chart:** Integrated line chart using `recharts` to view historical usage data over the week.
+- **Biomarker Metrics:** View critical metrics like Heart Rate.
+- **Modern UI:** Built from scratch using raw CSS variables, glassmorphism cards, and flex/grid layouts—all without relying on heavy external CSS frameworks.
+- **Responsive Empty/Loading States:** Clean placeholders with animations for fetching backend data.
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- `src/components/` - React UI components (`PatientList`, `PatientInfo`, `RiskScore`, `UsageChart`, `Biomarker`)
+- `src/hook/` - Custom React hooks for data fetching (`usePatients`, `useDashboardData`)
+- `src/types/` - TypeScript definitions for data structures
+- `src/App.css` - Global design system and layout styling
+- `backend/` - FastAPI backend returning patient data (Python)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Running the Application
+
+### 1. Start the Backend API
+The dashboard relies on a Python backend.
+```bash
+cd backend
+pip install fastapi uvicorn
+uvicorn main:app --reload --port 8000
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 2. Start the Frontend
+In a new terminal window, run the React development server:
+```bash
+npm install
+npm run dev
 ```
+
+Navigate to the local URL provided by Vite (usually `http://localhost:5173`) in your browser to view the application.
+
+## Technologies Used
+
+- **React** (Hooks, state management)
+- **TypeScript** (Static typing)
+- **Vite** (Build tool)
+- **Recharts** (Data visualization)
+- **Vanilla CSS** (Custom modern design system)

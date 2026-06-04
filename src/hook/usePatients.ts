@@ -10,7 +10,7 @@ export function usePatients() {
 useEffect(() => {
     async function fetchPatients() {
       try {
-        const result = await fetch("http://localhost:8000/patients")
+        const result = await fetch("http://127.0.0.1:8000/patients")
         const patientRes = await result.json()
         setPatients(patientRes)
         
