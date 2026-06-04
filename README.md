@@ -2,6 +2,10 @@
 
 A modern, clean, and interactive patient dashboard built with React. This application provides a medical interface to view patient information, status, usage history, biomarker data, and risk scores.
 
+<img width="1908" height="970" alt="Capture d’écran 2026-06-04 à 16 31 10" src="https://github.com/user-attachments/assets/6f05c59a-d41a-4902-87e4-2a5b8f3b3256" />
+<img width="1908" height="970" alt="Capture d’écran 2026-06-04 à 16 31 25" src="https://github.com/user-attachments/assets/7bdd64cf-821c-49f9-b13c-c1177b9e9c57" />
+
+
 ## Features
 
 - **Sidebar Navigation:** Quickly browse and select patients from the master list.
